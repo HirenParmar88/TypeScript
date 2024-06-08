@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks</title>
+    <script>
+        // Function to calculate total marks
+        function calculateTotalMarks() {
+            const mMarks = parseFloat(document.getElementById("mMarks").value);
+            const bctMarks = parseFloat(document.getElementById("bctMarks").value);
+            const dpMarks = parseFloat(document.getElementById("dpMarks").value);
+            
+            const totalMarks = mMarks + bctMarks + dpMarks;
+            return totalMarks;
+        }
+
+        // Function to calculate percentage
+        function calculatePercentage() {
+            const totalMarks = calculateTotalMarks();
+            const totalPercentage = (totalMarks / 300) * 100; // Assuming total marks for all subjects is 300
+            return totalPercentage.toFixed(2); // Round to 2 decimal places
+        }
+
+        // Function to display student information in table format
+        function displayStudentInfo() {
+            const rollNumber = document.getElementById("rollNumber").value;
+            const name = document.getElementById("name").value;
+            const mMarks = parseFloat(document.getElementById("mMarks").value);
+            const bctMarks = parseFloat(document.getElementById("bctMarks").value);
+            const dpMarks = parseFloat(document.getElementById("dpMarks").value);
+            const percentage = calculatePercentage();
+            
+            // Create a table row
+            const tableRow = "<tr><td>" + rollNumber + "</td><td>" + name + "</td><td>" + mMarks + "</td><td>" + bctMarks + "</td><td>" + dpMarks + "</td><td>" + percentage + "%</td></tr>";
+            
+            // Append the table row to the table body
+            document.getElementById("resultTableBody").innerHTML += tableRow;
+        }
+    </script>
+</head>
+<body>
+    <h2>Enter Student Information</h2>
+    <form>
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" required><br><br>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+
+        <label for="mMarks">ML marks:</label>
+        <input type="number" id="mMarks" min="0" max="100" required><br><br>
+
+        <label for="bctMarks">BCT marks:</label>
+        <input type="number" id="bctMarks" min="0" max="100" required><br><br>
+
+        <label for="dpMarks">DP marks:</label>
+        <input type="number" id="dpMarks" min="0" max="100" required><br><br>
+
+        <button type="button" onclick="displayStudentInfo()">View Result</button>
+    </form>
+
+    <h2>Result</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>ML Marks</th>
+                <th>BCT Marks</th>
+                <th>DP Marks</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody id="resultTableBody">
+            <!-- Result table body will be filled dynamically -->
+        </tbody>
+    </table>
+</body>
+</html>
